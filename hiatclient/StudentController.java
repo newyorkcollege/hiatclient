@@ -19,15 +19,20 @@ import javax.swing.event.ChangeListener;
 public class StudentController implements ChangeListener, KeyListener {
     
     private StudentFrame frame;
+    private StudentThread thread;
     
     public StudentController() {
         frame = new StudentFrame(this);
+        thread = new StudentThread();
+        thread.start();
     }
 
     @Override
     public void stateChanged(ChangeEvent e) {
         JSlider source = (JSlider)e.getSource();
-        System.out.println(source.getName() + " " + source.getValue());
+        System.out.println(source.getName() + "#" + source.getValue());
+        
+        thread.sendMessage(source.getName() + "#" + source.getValue());
     }
 
     @Override
@@ -40,7 +45,9 @@ public class StudentController implements ChangeListener, KeyListener {
         if(e.getKeyCode() == KeyEvent.VK_ENTER) {
             JTextField field = (JTextField)e.getSource();
             
-            System.out.println(field.getText());
+            System.out.println("message#" + field.getText());
+            
+            thread.sendMessage("message#" + field.getText());
             
             field.setText("");
         }
