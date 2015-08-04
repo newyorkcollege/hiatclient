@@ -30,9 +30,12 @@ public class StudentController implements ChangeListener, KeyListener {
     @Override
     public void stateChanged(ChangeEvent e) {
         JSlider source = (JSlider)e.getSource();
-        System.out.println(source.getName() + "#" + source.getValue());
         
-        thread.sendMessage(source.getName() + "#" + source.getValue());
+        if(!source.getValueIsAdjusting()) {
+            System.out.println(source.getName() + "#" + source.getValue());
+
+            thread.sendMessage(source.getName() + "#" + source.getValue());
+        }
     }
 
     @Override
