@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This software is open source and it is provided as-is without and warranty.
+ * Licence file to be added soon.
  */
 package hiatclient;
 
@@ -15,23 +14,35 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
 /**
- *
+ * The user interface of the client side part (student)
+ * Displays 2 sliders for interesting and understanding values respectively,
+ * and a text field for messages. 
+ * 
  * @author gprok
  */
 public class StudentFrame extends JFrame {
     
+    /** Text field where the student writes a message for the tutor */
     private JTextField questionField;
-    
+    /** Slider where the student sets the leven of interest for the current topic */
     private JSlider interestingSlider;
+    /** Slider where the student sets the leven of understanding for the current topic */
     private JSlider understandingSlider;
     
+    
+    /**
+     * Constructor. 
+     * Initializes the frame and the included widgets.
+     * 
+     * @param control Listener for both the sliders and the text field.
+     */
     public StudentFrame(StudentController control) {
-        setSize(300, 300);
+        setSize(300, 350);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         
         JPanel centerPanel = new JPanel();
-        centerPanel.setLayout(new GridLayout(4, 1));
+        centerPanel.setLayout(new GridLayout(6, 1));
         
         centerPanel.add(new JLabel("Interesting:"));
         interestingSlider = new JSlider(1, 5);
@@ -58,16 +69,13 @@ public class StudentFrame extends JFrame {
         understandingSlider.addChangeListener(control);
         understandingSlider.setToolTipText("Understanding");
         centerPanel.add(understandingSlider);
+                
+        questionField = new JTextField(24);
+        questionField.addKeyListener(control);
+        centerPanel.add(new JLabel("Send Message:"));
+        centerPanel.add(questionField);
         
         add(centerPanel, BorderLayout.CENTER);
-        
-        JPanel southPanel = new JPanel();
-        
-        questionField = new JTextField(30);
-        questionField.addKeyListener(control);
-        southPanel.add(questionField);
-        
-        add(southPanel, BorderLayout.SOUTH);
 
         setVisible(true);
     }

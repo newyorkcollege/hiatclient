@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This software is open source and it is provided as-is without and warranty.
+ * Licence file to be added soon.
  */
 package hiatclient;
 
