@@ -27,6 +27,8 @@ public class StudentThread implements Runnable {
     private Socket socket;
     /** Writer of the socket, used to send data to the server */
     private PrintWriter out;
+    /** ID of the client, given by the server */
+    private int id;
 
     /**
      * Initiates writer to the socket and then keeps the connection open 
@@ -47,7 +49,8 @@ public class StudentThread implements Runnable {
                             new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String idStr = "";
             while((idStr = input.readLine()) != null) {
-                System.out.println(idStr);
+                id = Integer.parseInt(idStr);
+                System.out.println(id);
                 break;
             }
             out = new PrintWriter(socket.getOutputStream(), true);
@@ -65,7 +68,7 @@ public class StudentThread implements Runnable {
      * @param msg The message to be send
      */
     public void sendMessage(String msg) {
-        out.println(msg);
+        out.println(id + "#" + msg);
     }
     
     
